@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
 import { projectFirestor } from "@/firebase/config";
 
 const getCollection = (collection) => {
@@ -10,7 +10,7 @@ const getCollection = (collection) => {
     .collection(collection)
     .orderBy("createdAt");
 
-  collectionRef.onSnapshot(
+  const unsub = collectionRef.onSnapshot(
     (snap) => {
       let results = [];
       snap.docs.forEach((doc) => {
@@ -25,6 +25,10 @@ const getCollection = (collection) => {
       error.value = "could not fatch data";
     }
   );
+
+  watchEffect((onInvalidate) => {
+    onInvalidate(() => unsub());
+  });
 
   return {
     documents,
