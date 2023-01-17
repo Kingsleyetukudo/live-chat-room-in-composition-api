@@ -17,7 +17,7 @@ import getUser from "@/composables/getUser";
 import { timestamp } from "../firebase/config";
 export default {
   setup() {
-    const { addDoc, error } = useCollection("message");
+    const { addDoc, error } = useCollection("messages");
     const { user } = getUser();
     const message = ref("");
     const handleSubmit = async () => {
