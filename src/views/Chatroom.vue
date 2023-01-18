@@ -14,7 +14,7 @@ import getUser from "../composables/getUser";
 import { useRouter } from "vue-router";
 import NewChatForm from "../components/NewChatForm.vue";
 export default {
-  components: { Navbar, NewChatForm, ChatWindow },
+  components: { Navbar, NewChatForm, ChatWindow, Item },
 
   setup() {
     const { user } = getUser();
